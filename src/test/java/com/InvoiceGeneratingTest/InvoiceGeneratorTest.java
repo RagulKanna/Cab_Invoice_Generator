@@ -1,6 +1,7 @@
 package com.InvoiceGeneratingTest;
 
 import com.InvoiceGenerating.InvoiceGenerator;
+import com.InvoiceGenerating.Invoice_Summary;
 import com.InvoiceGenerating.Rides;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,5 +33,18 @@ public class InvoiceGeneratorTest {
                 new Rides(0.1, 1)};
         double totalFare = invoiceGenerator.calculateFare(rides);
         Assert.assertEquals(57, totalFare, 0.0);
+    }
+
+    @Test
+    public void givenMultipleRides_ShouldReturnInvoiceSummary() {
+
+        Rides[] rides = {new Rides(5.0, 5),
+                new Rides(0.1, 1)};
+        Invoice_Summary actualsummary = invoiceGenerator.calculateFareReturnSummary(rides);
+        Invoice_Summary expectedSummary = new Invoice_Summary(2, 60);
+        if(expectedSummary.getAverageFare() == actualsummary.getAverageFare() && expectedSummary.getNumberOfRides() == actualsummary.getNumberOfRides() && expectedSummary.getTotalFare() == actualsummary.getTotalFare())
+            Assert.assertEquals(1, 1);
+        else
+            Assert.assertEquals(1,0);
     }
 }
